@@ -2,11 +2,12 @@
 
 ## About the program
 
-This software has been written during the PhD of Grégory SETNIKAR. It answer the need of a more complexe tool for determination of selection rules (for Raman scattering) than the already available one on https://www.cryst.ehu.es/cryst/polarizationselrules.html. Additionally to phonon determination (Bilbao), this software allow the user to have any excitations. Moreover, this program is more user friendly and permit the computation depending on:
-- The symmetry of the crystal
+This software was written during the PhD of Grégory SETNIKAR. It answers the need of a comprehensive tool for determination of the selection rules for Raman scattering with two available databases (Bilbao and Loudon and Hayes):
+
+- The symmetry of the crystal (space group)
 - The orientation of the crystal
-- The pointing vector
-- Polarization of your excitation/collection path
+- The Pointing vector
+- Polarizations of the incident and scattered light
 
 The graphical interface is built as a web application using Node.js and classical web development tools (HTML5, CSS, JavaScript).
 Computations are done using Python 3 and all the results are plotted or saved in LaTeX. 
