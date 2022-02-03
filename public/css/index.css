@@ -39,6 +39,16 @@ table, th, td
   filter: brightness(.8) contrast(1.2)  invert(1);
 }
 
+.erc {
+  -webkit-filter: grayscale(1);
+  filter: grayscale(1)
+}
+
+.dark-theme .erc {
+  -webkit-filter: grayscale(1) invert(1);
+  filter: grayscale(1) brightness(.8) contrast(1.2)  invert(1);
+}
+
 .dark-theme table, .dark-theme td {
   border: 1px solid #F5F5F5 !important;
 }
