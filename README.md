@@ -12,7 +12,7 @@ This software was written during the PhD of Grégory SETNIKAR. It answers the ne
 The graphical interface is built as a web application using Node.js and classical web development tools (HTML5, CSS, JavaScript).
 Computations are done using Python 3 and all the results are plotted or saved in LaTeX. 
 
-The web application is available on https://www.raman-selection-rules-calculator.fr
+The web application is available on http://www.raman-selection-rules-calculator.fr
 
 ## Installation
 
