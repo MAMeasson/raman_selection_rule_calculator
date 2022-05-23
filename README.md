@@ -6,7 +6,7 @@ This software was written during the PhD of Grégory SETNIKAR. It answers the ne
 
 - The symmetry of the crystal (space group)
 - The orientation of the crystal
-- The Pointing vector
+- The Poynting vector
 - Polarizations of the incident and scattered light
 
 The graphical interface is built as a web application using Node.js and classical web development tools (HTML5, CSS, JavaScript).
