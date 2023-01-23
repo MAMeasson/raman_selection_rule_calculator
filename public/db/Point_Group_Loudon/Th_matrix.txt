@@ -1,4 +1,4 @@
-\tilde{\gamma_k}^{A_{1g}} = 
+\tilde{\gamma_k}^{A_{g}} = 
 \begin{pmatrix}
 a & 0 & 0 \\
 0 & a & 0 \\

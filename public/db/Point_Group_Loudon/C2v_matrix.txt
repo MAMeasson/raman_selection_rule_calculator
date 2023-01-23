@@ -12,14 +12,14 @@ e & 0 & 0 \\
 0 & 0 & 0
 \end{pmatrix};
 
-\tilde{\gamma_k}^{A_{1g}} = 
+\tilde{\gamma_k}^{B_{1}} = 
 \begin{pmatrix}
 0 & 0 & f \\
 0 & 0 & 0 \\
 g & 0 & 0
 \end{pmatrix};
 
-\tilde{\gamma_k}^{A_{1g}} = 
+\tilde{\gamma_k}^{B_{2}} = 
 \begin{pmatrix}
 0 & 0 & 0 \\
 0 & 0 & h \\
