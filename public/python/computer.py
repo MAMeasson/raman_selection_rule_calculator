@@ -153,7 +153,7 @@ def calcul_algo():
 
     try:
         space_group = sys.argv[1]
-        list_group = ["C1","C2","C2h","C2v","C3h","C3","C3i","C3v","C4","C4h","C4v","C6","C6h","C6v","Ci","Cs","D2","D2d","D2h","D3","D3d","D3d","D4","D4h","D6","D6h","O","Oh","S4","T","Td","Th"]
+        list_group = ["C1","C2","C2h","C2v","C3h","C3","C3i","C3v","C4","C4h","C4v","C6","C6h","C6v","Ci","Cs","D2","D2d","D2h","D3","D3h","D3d","D4","D4h","D6","D6h","O","Oh","S4","T","Td","Th"]
         assert space_group in list_group
     except AssertionError:
         print("sg")
