@@ -442,7 +442,7 @@ function save_tex(){
   function replaceMathematicalSubscripts(text) {
   // Regular expression to match "V" or "H" followed by one or more digits
   const regex = /([VH])(\d+)/g;
-  return text.replace(regex, "$$1_{$2}$$");
+  return text.replace(regex, "${$1}_{$2}$$");
 }
 
   for (let i = 0; i < table_Rows.length; i++) {
@@ -479,12 +479,11 @@ function save_tex(){
    
   }
 
-  console.log(result_output)
   for (let j = 1; j < nb_element; j++) {
     number_col+= "c|"
    }
 
-  result_str = "\\usepackage{booktabs}\n \\usepackage{adjustbox}\n\\usepackage{float}\n\\usepackage{hyperref}\n\\usepackage{amsmath}\n\\usepackage{amssymb}\n\nThe online version of the article can be found at \\href{https://doi.org/10.1016/j.softx.2022.101152}{https://doi.org/10.1016/j.softx.2022.101152}. \n\n \\begin{table}[H] \n \\centering \n \\begin{adjustbox}{max width=\\textwidth} \n \\begin{tabular}{" + number_col +"}\n \\toprule \n" + result_str + "\\bottomrule \n \\end{tabular} \n \\end{adjustbox} \n \\caption{Raman selection rules for the space group. Calculation are from Setnikar \\textit{et al.} \\cite{Setnikar2022}}. \n \\label{myselectionrules} \n \\end{table} \n\n \%Put this in your .bib file \n @article{Setnikar2022,\n  title = {Raman {{Selection Rules Calculator}}: {{A}} Simplified Selection Rules Calculator for {{Raman}} Spectroscopy Experiment}, \n  shorttitle = {Raman {{Selection Rules Calculator}}},\n  author = {Setnikar, Gr{\'e}gory and Samson, Julien and M{\'e}asson, Marie-Aude},\n  year = {2022},\n  month = jul,\n  journal = {SoftwareX}, \n  volume = {19}, \n  pages = {101152}, \n  issn = {23527110}, \n  doi = {10.1016/j.softx.2022.101152}, \n  langid = {english}, \n }"
+  result_str = "\\usepackage{booktabs}\n\\usepackage{adjustbox}\n\\usepackage{float}\n\\usepackage{hyperref}\n\\usepackage{amsmath}\n\\usepackage{amssymb}\n\nThe online version of the article can be found at \\href{https://doi.org/10.1016/j.softx.2022.101152}{https://doi.org/10.1016/j.softx.2022.101152}. \n\n \\begin{table}[H] \n \\centering \n \\begin{adjustbox}{max width=\\textwidth} \n \\begin{tabular}{" + number_col +"}\n \\toprule \n" + result_str + "\\bottomrule \n \\end{tabular} \n \\end{adjustbox} \n \\caption{Raman selection rules for the space group. Calculation are from Setnikar \\textit{et al.} \\cite{Setnikar2022}}. \n \\label{myselectionrules} \n \\end{table} \n\n \%Put this in your .bib file \n @article{Setnikar2022,\n  title = {Raman {{Selection Rules Calculator}}: {{A}} Simplified Selection Rules Calculator for {{Raman}} Spectroscopy Experiment}, \n  shorttitle = {Raman {{Selection Rules Calculator}}},\n  author = {Setnikar, Gr{\'e}gory and Samson, Julien and M{\'e}asson, Marie-Aude},\n  year = {2022},\n  month = jul,\n  journal = {SoftwareX}, \n  volume = {19}, \n  pages = {101152}, \n  issn = {23527110}, \n  doi = {10.1016/j.softx.2022.101152}, \n  langid = {english}, \n }"
   
   const downloadToFile = (content, filename, contentType) => {
     const a = document.createElement('a');
