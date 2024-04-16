@@ -369,7 +369,82 @@ function save_tex(){
   let result_str =""
   let number_col = "|c||"
   let nb_element
+
+    // Define a mapping for each mathematical italic character to its regular counterpart
+  const italicToRegularMap = {
+  "𝐴": "A", "𝑨": "A",
+  "𝐵": "B", "𝑩": "B",
+  "𝐶": "C", "𝑪": "C",
+  "𝐷": "D", "𝑫": "D",
+  "𝐸": "E", "𝑬": "E",
+  "𝐹": "F", "𝑭": "F",
+  "𝐺": "G", "𝑮": "G",
+  "𝐻": "H", "𝑯": "H",
+  "𝐼": "I", "𝑰": "I",
+  "𝐽": "J", "𝑱": "J",
+  "𝐾": "K", "𝑲": "K",
+  "𝐿": "L", "𝑳": "L",
+  "𝑀": "M", "𝑴": "M",
+  "𝑁": "N", "𝑵": "N",
+  "𝑂": "O", "𝑶": "O",
+  "𝑃": "P", "𝑷": "P",
+  "𝑄": "Q", "𝑸": "Q",
+  "𝑅": "R", "𝑹": "R",
+  "𝑆": "S", "𝑺": "S",
+  "𝑇": "T", "𝑻": "T",
+  "𝑈": "U", "𝑼": "U",
+  "𝑉": "V", "𝑽": "V",
+  "𝑊": "W", "𝑾": "W",
+  "𝑋": "X", "𝑿": "X",
+  "𝑌": "Y", "𝒀": "Y",
+  "𝑍": "Z", "𝒁": "Z",
+  "𝑎": "a", "𝒂": "a",
+  "𝑏": "b", "𝒃": "b",
+  "𝑐": "c", "𝒄": "c",
+  "𝑑": "d", "𝒅": "d",
+  "𝑒": "e", "𝒆": "e",
+  "𝑓": "f", "𝒇": "f",
+  "𝑔": "g", "𝒈": "g",
+  "ℎ": "h", "𝒉": "h",
+  "𝑖": "i", "𝒊": "i",
+  "𝑗": "j", "𝒋": "j",
+  "𝑘": "k", "𝒌": "k",
+  "𝑙": "l", "𝒍": "l",
+  "𝑚": "m", "𝒎": "m",
+  "𝑛": "n", "𝒏": "n",
+  "𝑜": "o", "𝒐": "o",
+  "𝑝": "p", "𝒑": "p",
+  "𝑞": "q", "𝒒": "q",
+  "𝑟": "r", "𝒓": "r",
+  "𝑠": "s", "𝒔": "s",
+  "𝑡": "t", "𝒕": "t",
+  "𝑢": "u", "𝒖": "u",
+  "𝑣": "v", "𝒗": "v",
+  "𝑤": "w", "𝒘": "w",
+  "𝑥": "x", "𝒙": "x",
+  "𝑦": "y", "𝒚": "y",
+  "𝑧": "z", "𝒛": "z"
+};
+
+    // Function to convert mathematical italic characters to regular characters
+  function convertToRegular(text) {
+  let result = "";
+  for (let char of text) {
+    if (italicToRegularMap[char]) {
+      result += italicToRegularMap[char];
+    } else {
+      result += char;
+    }
+  }
+  return result;
+}
  
+  function replaceMathematicalSubscripts(text) {
+  // Regular expression to match "V" or "H" followed by one or more digits
+  const regex = /([VH])(\d+)/g;
+  return text.replace(regex, "$$1_{$2}$$");
+}
+
   for (let i = 0; i < table_Rows.length; i++) {
     const element = table_Rows[i].innerText;
     result_output[i] = element.split("\t")
@@ -377,16 +452,16 @@ function save_tex(){
     nb_element = result_output[0].length
 
     for (let j = 0; j < result_output[0].length; j++) {
-      result_output[i][j] = result_output[i][j].replace("\n","")
-      result_output[i][j] = result_output[i][j].replace("|","\\left|")
-      result_output[i][j] = result_output[i][j].replace("|2","\\right|^2")
-      result_output[i][j] = result_output[i][j].replace("\n","")
-      result_output[i][j] = result_output[i][j].replace("1g","_{1g}")
-      result_output[i][j] = result_output[i][j].replace("2g","_{2g}")
-      result_output[i][j] = result_output[i][j].replace("3g","_{3g}")
-      result_output[i][j] = result_output[i][j].replace("V45","$V_{45}$")
-      result_output[i][j] = result_output[i][j].replace("H45","$H_{45}$")
-      
+      result_output[i][j] = result_output[i][j].replaceAll("\n","")
+      result_output[i][j] = result_output[i][j].replaceAll("|","\\left|")
+      result_output[i][j] = result_output[i][j].replaceAll("|2","\\right|^2")
+      result_output[i][j] = convertToRegular(result_output[i][j])
+      result_output[i][j] = result_output[i][j].replaceAll("1g","_{1g}")
+      result_output[i][j] = result_output[i][j].replaceAll("2g","_{2g}")
+      result_output[i][j] = result_output[i][j].replaceAll("3g","_{3g}")
+      result_output[i][j] = replaceMathematicalSubscripts(result_output[i][j]);
+      result_output[i][j] = result_output[i][j].replaceAll("Eg","E_g")
+  
       if (j>0) {
         result_output[i][j] = "$" + result_output[i][j] + "$"
       }
@@ -404,11 +479,12 @@ function save_tex(){
    
   }
 
+  console.log(result_output)
   for (let j = 1; j < nb_element; j++) {
     number_col+= "c|"
    }
 
-result_str = "The online version of the article can be found at \\href{https://doi.org/10.1016/j.softx.2022.101152}{https://doi.org/10.1016/j.softx.2022.101152}. \n\n \\begin{table}[H] \n \\centering \n \\begin{adjustbox}{max width=\\textwidth} \n \\begin{tabular}{" + number_col +"}\n \\toprule \n" + result_str + "\\bottomrule \n \\end{tabular} \n \\end{adjustbox} \n \\caption{Raman selection rules for the space group. Calculation are from Setnikar \\textit{et al.} \\cite{Setnikar2022}}. \n \\label{myselectionrules} \n \\end{table} \n\n \%Put this in your .bib file \n @article{Setnikar2022,\n  title = {Raman {{Selection Rules Calculator}}: {{A}} Simplified Selection Rules Calculator for {{Raman}} Spectroscopy Experiment}, \n  shorttitle = {Raman {{Selection Rules Calculator}}},\n  author = {Setnikar, Gr{\'e}gory and Samson, Julien and M{\'e}asson, Marie-Aude},\n  year = {2022},\n  month = jul,\n  journal = {SoftwareX}, \n  volume = {19}, \n  pages = {101152}, \n  issn = {23527110}, \n  doi = {10.1016/j.softx.2022.101152}, \n  langid = {english}, \n }"
+  result_str = "\\usepackage{booktabs}\n \\usepackage{adjustbox}\n\\usepackage{float}\n\\usepackage{hyperref}\n\\usepackage{amsmath}\n\\usepackage{amssymb}\n\nThe online version of the article can be found at \\href{https://doi.org/10.1016/j.softx.2022.101152}{https://doi.org/10.1016/j.softx.2022.101152}. \n\n \\begin{table}[H] \n \\centering \n \\begin{adjustbox}{max width=\\textwidth} \n \\begin{tabular}{" + number_col +"}\n \\toprule \n" + result_str + "\\bottomrule \n \\end{tabular} \n \\end{adjustbox} \n \\caption{Raman selection rules for the space group. Calculation are from Setnikar \\textit{et al.} \\cite{Setnikar2022}}. \n \\label{myselectionrules} \n \\end{table} \n\n \%Put this in your .bib file \n @article{Setnikar2022,\n  title = {Raman {{Selection Rules Calculator}}: {{A}} Simplified Selection Rules Calculator for {{Raman}} Spectroscopy Experiment}, \n  shorttitle = {Raman {{Selection Rules Calculator}}},\n  author = {Setnikar, Gr{\'e}gory and Samson, Julien and M{\'e}asson, Marie-Aude},\n  year = {2022},\n  month = jul,\n  journal = {SoftwareX}, \n  volume = {19}, \n  pages = {101152}, \n  issn = {23527110}, \n  doi = {10.1016/j.softx.2022.101152}, \n  langid = {english}, \n }"
   
   const downloadToFile = (content, filename, contentType) => {
     const a = document.createElement('a');
